@@ -5,15 +5,16 @@ import (
 	"bytes"
 )
 
+// TestNew tests the tracing befaviour.
 func TestNew(t *testing.T) {
 	var buf bytes.Buffer
 	tracer := New(&buf)
 	if tracer == nil {
-		t.Error("Newからの戻り値がnilです")
+		t.Error("Return from New should not be nil")
 	} else {
-		tracer.Trace("こんにちは、traceパッケージ")
-		if buf.String() !=  "こんにちは、traceパッケージ\n" {
-			t.Error("'%s'という誤った文字列が出力されました", buf.String())
+		tracer.Trace("Hello trace package.")
+		if buf.String() !=  "Hello trace package.\n" {
+			t.Error("Trace should not write '%s'.", buf.String())
 		}
 	}
 }
